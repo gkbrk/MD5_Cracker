@@ -78,6 +78,25 @@ def crackWithDarkbyteRu(md5):
     else:
         return False
 
+def crackWithMD5net(md5):
+    import re
+    import mechanize
+    
+    br = mechanize.Browser()
+    br.set_handle_robots(False)
+    response = br.open('http://www.md5.net/cracker.php')
+    br.select_form(nr=0)
+    br['hash'] = md5
+    
+    response2 = br.submit()
+    source=response2.read()
+    
+    found=re.search('<input type="text" id="hash" size="32" value="(.*?)">',source)
+    if found:
+        return found.group(1)
+    else:
+        return False
+
 print "Online MD5 Cracker"
 
 hashToCrack = hashToCrackWithArgv()
@@ -86,3 +105,4 @@ print styledCrackResult("MD5online.org",crackWithMd5OnlineOrg(hashToCrack))
 print styledCrackResult("CMD5.org",crackWithCmd5Org(hashToCrack))
 print styledCrackResult("Tobtu.com",crackWithTobtu(hashToCrack))
 print styledCrackResult("Darkbyte.ru",crackWithDarkbyteRu(hashToCrack))
+print styledCrackResult("MD5.net",crackWithMD5net(hashToCrack))
