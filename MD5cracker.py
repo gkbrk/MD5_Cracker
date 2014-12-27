@@ -1,6 +1,8 @@
+import sys
+import mechanize
+import re
+
 def hashToCrackWithArgv():
-    import sys
-    
     if len(sys.argv)>1:
         return str(sys.argv[1])
     else:
@@ -13,9 +15,6 @@ def styledCrackResult(serviceName,md5):
         return "[-] Failed to crack with "+str(serviceName)
 
 def crackWithMd5OnlineOrg(md5):
-    import re
-    import mechanize
-    
     br = mechanize.Browser()
     br.set_handle_robots(False)
     response = br.open('http://www.md5online.org/')
@@ -32,9 +31,6 @@ def crackWithMd5OnlineOrg(md5):
         return False
 
 def crackWithCmd5Org(md5):
-    import re
-    import mechanize
-    
     br = mechanize.Browser()
     br.set_handle_robots(False)
     response = br.open('http://www.cmd5.org/')
@@ -51,9 +47,6 @@ def crackWithCmd5Org(md5):
         return False
 
 def crackWithTobtu(md5):
-    import re
-    import mechanize
-    
     br = mechanize.Browser()
     br.set_handle_robots(False)
     response = br.open('http://www.tobtu.com/md5.php?h='+str(md5))
@@ -66,8 +59,6 @@ def crackWithTobtu(md5):
         return False
 
 def crackWithDarkbyteRu(md5):
-    import mechanize
-    
     br = mechanize.Browser()
     br.set_handle_robots(False)
     response = br.open('http://md5.darkbyte.ru/api.php?q='+str(md5))
@@ -79,9 +70,6 @@ def crackWithDarkbyteRu(md5):
         return False
 
 def crackWithMD5net(md5):
-    import re
-    import mechanize
-    
     br = mechanize.Browser()
     br.set_handle_robots(False)
     response = br.open('http://www.md5.net/cracker.php')
